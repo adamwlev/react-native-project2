@@ -31,10 +31,26 @@ export default class Search extends React.Component {
         this.setState( ({ searchResults, nextPage }) => 
             ({ searchResults: [...searchResults, ...results], nextPage: nextPage + 1 }))
     }
+
+    goToDetailsPage = (id) => {
+        this.props.navigation.navigate("MovieDetails", { id })
+    }
+
+    renderSearchResult = (searchResult) => {
+        const { goToDetailsPage } = this
+
+        return (
+            <SearchResult 
+                searchResult={searchResult}
+                onPress={() => goToDetailsPage(searchResult.item.id)}
+            />
+        )
+    }
     
     render() {
         const { state: { searchStr, searchResults }, 
-                onChangeText, doSearch, getNextPage } = this
+                onChangeText, doSearch, getNextPage,
+                renderSearchResult } = this
 
         return (
             <>
@@ -46,7 +62,7 @@ export default class Search extends React.Component {
                     style={styles.input} />
                 <SafeAreaView style={styles.container}>
                 <FlatList
-                    renderItem={ (item) => <SearchResult searchResult={item}/> }
+                    renderItem={renderSearchResult}
                     data={searchResults}
                     style={styles.scrollView}
                     onEndReached={getNextPage}
