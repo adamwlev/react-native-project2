@@ -61,14 +61,14 @@ export default class Search extends React.Component {
                     value={searchStr}
                     style={styles.input} />
                 <SafeAreaView style={styles.container}>
-                <FlatList
-                    renderItem={renderSearchResult}
-                    data={searchResults}
-                    style={styles.scrollView}
-                    onEndReached={getNextPage}
-                    onEndReachedThreshold={.5}
-                    >
-                </FlatList>
+                    <FlatList
+                        renderItem={renderSearchResult}
+                        data={searchResults}
+                        onEndReached={getNextPage}
+                        onEndReachedThreshold={.5}
+                        contentContainerStyle={styles.scrollView}
+                        keyExtractor={(item, index) => 'key'+index}
+                    />
                 </SafeAreaView>
             </>
         )
@@ -81,10 +81,9 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         backgroundColor: '#ffeee3',
-        marginHorizontal: 10,
+        alignItems: 'center',
     },
     input: {
         fontFamily: 'Courier',
-        alignItems: 'center',
     },
-  })
+})

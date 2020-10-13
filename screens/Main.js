@@ -1,16 +1,18 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native'
 
 import Search from '../components/Search'
 
 export default function Main({ navigation }) { 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Adam's Movie Browser</Text>
-            <Search navigation={navigation}/>
-            <StatusBar style="dark" />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.container}>
+                <Search navigation={navigation}/>
+                <StatusBar style="dark" />
         </View>
+        </TouchableWithoutFeedback>
+        
     )
 }
 

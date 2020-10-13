@@ -4,7 +4,7 @@ import { Image } from 'react-native-elements'
 
 import { getMovieById } from '../api'
 
-export default class SearchResult extends React.Component {
+export default class SearchResult extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = { isLoaded: false }
@@ -12,10 +12,12 @@ export default class SearchResult extends React.Component {
     }
 
     loadMovie = async (id) => {
+        const { setOptions } = this.props.navigation
         const result = await getMovieById(id)
         if (result.id) {
             result.isLoaded = true
         }
+        setOptions({ title: result.title })
         this.setState(result)
     }
 

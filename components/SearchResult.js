@@ -19,8 +19,11 @@ export default class SearchResult extends React.Component {
 
 const styles = StyleSheet.create({
     item: {
-        margin: 5,
+        marginTop: 5,
+        marginBottom: 7,
         borderWidth: 2,
+        minWidth: "90%",
+        maxWidth: "90%",
     },
     allText: {
         fontFamily: 'Courier',

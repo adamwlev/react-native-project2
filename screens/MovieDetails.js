@@ -4,10 +4,10 @@ import { StyleSheet, View } from 'react-native'
 
 import Movie from '../components/Movie'
 
-export default function MovieDetails({ route }) {
+export default function MovieDetails({ navigation, route }) {
     return (
         <View style={styles.container}>
-            <Movie id={route.params.id}/>
+            <Movie navigation={navigation} id={route.params.id}/>
             <StatusBar style="dark" />
         </View>
     )
