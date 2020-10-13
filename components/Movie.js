@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Image } from 'react-native-elements'
+import { StyleSheet, ScrollView, SafeAreaView } from 'react-native'
+import { Image, Text } from 'react-native-elements'
 
 import { getMovieById } from '../api'
 
@@ -21,8 +21,15 @@ export default class SearchResult extends React.PureComponent {
         this.setState(result)
     }
 
+    renderRating = (rating, index) => (
+        <Text key={"key"+index} style={[styles.allText, styles.ratings]}>
+            {`${rating.Source}: ${rating.Value}`}
+        </Text>
+    )
+    
     renderMovie = () => {
-        const { poster } = this.state
+        const { state: { title, year, type, rated, 
+                runtime, plot, poster, ratings }, renderRating } = this
 
         return (
             <>
@@ -30,6 +37,16 @@ export default class SearchResult extends React.PureComponent {
                     source={{ uri: poster }}
                     style={styles.image}
                 />
+                <Text style={[styles.allText, styles.title]}>
+                    {title}
+                </Text>
+                <Text style={[styles.allText, styles.subTitle]}>
+                    {`${year} ${type}, rated: ${rated}, runtime: ${runtime}`}
+                </Text>
+                <Text style={[styles.allText, styles.plot]}>
+                    {plot}
+                </Text>
+                {ratings.map(renderRating)}
             </>
         )
     }
@@ -38,9 +55,11 @@ export default class SearchResult extends React.PureComponent {
         const { state: { isLoaded }, renderMovie } = this
 
         return (
-            <View style={styles.container}>
-                {isLoaded && renderMovie()}
-            </View>
+            <SafeAreaView style={styles.container}>
+                <ScrollView contentContainerStyle={styles.scrollView}>
+                    {isLoaded && renderMovie()}
+                </ScrollView>
+            </SafeAreaView>
         )
     }
 }
@@ -49,11 +68,35 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#d1edd7',
+    },
+    scrollView: {
         alignItems: 'center',
     },
     image: {
         width: 200, 
         height: 300,
-        marginTop: 50,
-    }
+    },
+    allText: {
+        fontFamily: 'Courier',
+    },
+    title: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        marginTop: 8,
+        marginHorizontal: 20,
+    },
+    subTitle: {
+        fontSize: 20,
+        marginHorizontal: 8,
+        marginVertical: 12,
+    },
+    plot: {
+        fontSize: 16,
+        marginTop: 12,
+        marginBottom: 20,
+        marginHorizontal: 15,
+    },
+    ratings: {
+        fontSize: 16,
+    },
 })

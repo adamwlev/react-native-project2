@@ -13,6 +13,7 @@ const screenBaseOptions = {
     },
     headerTitleStyle: {
         fontFamily: 'Courier',
+        marginHorizontal: 5,
     },
     headerTintColor: '#a1501a',
 }
