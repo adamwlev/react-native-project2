@@ -20,7 +20,6 @@ export default class Search extends React.Component {
         const { searchStr } = this.state
 
         const results = await searchByString(searchStr)
-        console.log(results.length)
         this.setState({ searchResults: results, nextPage: 2 })
     }
 

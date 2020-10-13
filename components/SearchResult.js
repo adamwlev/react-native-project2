@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 
-export default class SearchResult extends React.Component {
+export default class SearchResult extends React.PureComponent {
     render() {
         const { title, year, type } = this.props.searchResult.item
         return (

@@ -21,6 +21,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "project 2 for react native course cs50 is a movie browser",
+    "githubUrl": "https://github.com/adamwlev/react-native-project2"
   }
 }
