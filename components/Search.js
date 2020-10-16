@@ -19,7 +19,7 @@ export default class Search extends React.Component {
     doSearch = async () => {
         const { searchStr } = this.state
 
-        const results = await searchByString(searchStr)
+        const results = await searchByString(searchStr.trim())
         this.setState({ searchResults: results, nextPage: 2 })
     }
 

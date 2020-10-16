@@ -1,4 +1,4 @@
-//const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 
 const apiKey = '69e3891a'
 const base_url = `http://www.omdbapi.com/?apikey=${apiKey}&`
@@ -47,7 +47,7 @@ const getMovieById = async (id) => {
 export { searchByString, getMovieById }
 
 // (async () => {
-//     const results = await searchByString('a')
+//     const results = await searchByString("Breakfast At Tiffany's")
 //     console.log(results)
 // })()
 
