@@ -14,8 +14,9 @@ export default class Search extends React.Component {
     }
 
     doSearch = async () => {
-        const { searchStr } = this.state
+        const { searchStr, searchTimeout } = this.state
 
+        clearTimeout(searchTimeout)
         const results = await searchByString(searchStr)
         this.setState({ searchResults: results, 
                         nextPage: 2, searchTimeout: null })
@@ -25,7 +26,7 @@ export default class Search extends React.Component {
         const { doSearch, state: { searchTimeout } } = this
 
         clearTimeout(searchTimeout)
-        const newSearchTimeout = setTimeout(doSearch, 1000)
+        const newSearchTimeout = setTimeout(doSearch, 800)
         this.setState({ searchStr: text, searchTimeout: newSearchTimeout })
     }
 
