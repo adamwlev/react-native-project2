@@ -9,18 +9,24 @@ export default class Search extends React.Component {
     state = {
         searchStr: '',
         nextPage: 2,
-        searchResults: []
-    }
-    
-    onChangeText = text => {
-        this.setState({ searchStr: text })
+        searchResults: [],
+        searchTimeout: null,
     }
 
     doSearch = async () => {
         const { searchStr } = this.state
 
-        const results = await searchByString(searchStr.trim())
-        this.setState({ searchResults: results, nextPage: 2 })
+        const results = await searchByString(searchStr)
+        this.setState({ searchResults: results, 
+                        nextPage: 2, searchTimeout: null })
+    }
+
+    onChangeText = text => {
+        const { doSearch, state: { searchTimeout } } = this
+
+        clearTimeout(searchTimeout)
+        const newSearchTimeout = setTimeout(doSearch, 1000)
+        this.setState({ searchStr: text, searchTimeout: newSearchTimeout })
     }
 
     getNextPage = async () => {

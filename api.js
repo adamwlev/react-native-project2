@@ -24,7 +24,8 @@ const processMovieResult = movieResult => ({
 
 const searchByString = async (str, page=1) => {
     try {
-        const response = await fetch(`${base_url}s=${str}&page=${page}`)
+        const searchString = encodeURIComponent(str.trim())
+        const response = await fetch(`${base_url}s=${searchString}&page=${page}`)
         const result = await response.json()
         return result.Search.map(processSearchResult)
     }
